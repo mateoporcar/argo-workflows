@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: kaniko-build-wt
+spec:
+  templates:
+    - name: kaniko-clone-build-template
+      container:
+        securityContext:
+          runAsNonRoot: false
+          runAsUser: 0
+          capabilities:
+            add: [CHOWN, FOWNER, SETUID, SETGID, DAC_OVERRIDE]
+        image: gcr.io/kaniko-project/executor:latest
+        #env:
+        command: ["/kaniko/executor"]
+        args:
+          [
+            "--context=git://github.com/nginxinc/docker-nginx.git",
+            "--dockerfile=Dockerfile-alpine-slim.template",
+            "--destination=harbor.itsos.ar/dummy/nginx:latest",
+            "--cache=true",
+            "--use-new-run"
+          ]
+        volumeMounts:
+        - name: auth-config
+          mountPath: /kaniko/.docker/
+      volumes:
+        - name: auth-config
+          projected:
+            sources:
+              - secret:
+                  name: regcred
+                  items:
+                    - key: .dockerconfigjson
+                      path: config.json
