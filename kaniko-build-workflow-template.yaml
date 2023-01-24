@@ -18,7 +18,7 @@ spec:
           [
             "--context=git://github.com/julianvilas/docker-http-server.git",
             "--dockerfile=Dockerfile",
-            "--destination=harbor.itsos.ar/dummy/nginx:latest",
+            "--destination=harbor.itsos.ar/dummy/http:latest",
             "--cache=true",
             "--use-new-run"
           ]
