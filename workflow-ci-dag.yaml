@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: workflow-ci-
+spec:
+  serviceAccountName: default
+  entrypoint: CI-INIT
+
+  arguments: 
+    parameters:
+      - name: harborRobotAccountSecretSnapshot
+        value: "robot-account-dummy"
+  templates:
+    - name: CI-INIT
+      dag:
+        tasks:        
+        - name: KANIKO-BUILD
+          templateRef:
+            name: kaniko-build-wt
+            template: kaniko-clone-build-template
