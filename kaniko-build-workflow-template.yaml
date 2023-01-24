@@ -16,8 +16,8 @@ spec:
         command: ["/kaniko/executor"]
         args:
           [
-            "--context=git://github.com/nginxinc/docker-nginx.git",
-            "--dockerfile=Dockerfile-alpine-slim.template",
+            "--context=git://github.com/julianvilas/docker-http-server.git",
+            "--dockerfile=Dockerfile",
             "--destination=harbor.itsos.ar/dummy/nginx:latest",
             "--cache=true",
             "--use-new-run"
