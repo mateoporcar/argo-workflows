@@ -5,6 +5,16 @@ metadata:
 spec:
   templates:
     - name: kaniko-clone-build-template
+      inputs:
+        artifacts:
+          - name: source
+            path: /workspace
+            git:
+              repo: "git@github.com:roldyxoriginal/RIS-VERSION_1.git"
+              sshPrivateKeySecret:
+                  name: github-creds
+                  key: ssh-private-key
+              insecureIgnoreHostKey: true
       container:
         securityContext:
           runAsNonRoot: false
@@ -16,8 +26,8 @@ spec:
         command: ["/kaniko/executor"]
         args:
           [
-            "--context=git://github.com/julianvilas/docker-http-server.git",
-            "--dockerfile=Dockerfile",
+            "--context=dir:///workspace/",
+            "--dockerfile=/workspace/Dockerfile",
             "--destination=harbor.itsos.ar/dummy/http:latest",
             "--cache=true",
             "--use-new-run"
