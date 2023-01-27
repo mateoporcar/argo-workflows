@@ -10,9 +10,10 @@ spec:
           - name: source
             path: /workspace
             git:
-              repo: "git@github.com:roldyxoriginal/RIS-VERSION_1.git"
+              #repo: "git@github.com:roldyxoriginal/RIS-VERSION_1.git"
+              repo: "git@github.com:mateoporcar/http-dummy.git" 
               sshPrivateKeySecret:
-                  name: github-creds
+                  name: github-creds-dummy
                   key: ssh-private-key
               insecureIgnoreHostKey: true
       container:
