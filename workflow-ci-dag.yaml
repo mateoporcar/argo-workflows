@@ -5,11 +5,23 @@ metadata:
 spec:
   serviceAccountName: default
   entrypoint: CI-INIT
-
   arguments: 
     parameters:
-      - name: harborRobotAccountSecretSnapshot
-        value: "robot-account-dummy"
+      - name: harborRobotAccountSecret
+        value: "regcred"
+      - name: project
+        value: dummy
+      - name: aplication
+        value: http
+      - name: version
+        value: latest
+      - name: destinoHarbor
+        value: harbor.itsos.ar/{{workflow.parameters.project}}/{{workflow.parameters.aplication}}:{{workflow.parameters.version}}
+      - name: gitHubRepo
+        value: git@github.com:mateoporcar/http-dummy.git
+        #value: git@github.com:roldyxoriginal/RIS-VERSION_1.git
+      - name: gitHubCreds
+        value: github-creds-dummy
   templates:
     - name: CI-INIT
       dag:

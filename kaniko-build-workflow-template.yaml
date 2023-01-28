@@ -10,10 +10,9 @@ spec:
           - name: source
             path: /workspace
             git:
-              #repo: "git@github.com:roldyxoriginal/RIS-VERSION_1.git"
-              repo: "git@github.com:mateoporcar/http-dummy.git" 
+              repo: "{{workflow.parameters.gitHubRepo}}" 
               sshPrivateKeySecret:
-                  name: github-creds-dummy
+                  name: "{{workflow.parameters.gitHubCreds}}"
                   key: ssh-private-key
               insecureIgnoreHostKey: true
       container:
@@ -22,14 +21,14 @@ spec:
           runAsUser: 0
           capabilities:
             add: [CHOWN, FOWNER, SETUID, SETGID, DAC_OVERRIDE]
-        image: gcr.io/kaniko-project/executor:v1.6.0
+        image: gcr.io/kaniko-project/executor:latest
         #env:
         command: ["/kaniko/executor"]
         args:
           [
             "--context=dir:///workspace/",
             "--dockerfile=/workspace/Dockerfile",
-            "--destination=harbor.itsos.ar/dummy/http:latest",
+            "--destination={{workflow.parameters.destinoHarbor}}",
             "--cache=true",
             "--use-new-run"
           ]
@@ -41,7 +40,7 @@ spec:
           projected:
             sources:
               - secret:
-                  name: regcred
+                  name: "{{workflow.parameters.harborRobotAccountSecret}}"
                   items:
                     - key: .dockerconfigjson
                       path: config.json
