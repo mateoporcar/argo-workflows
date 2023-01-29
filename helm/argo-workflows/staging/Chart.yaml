@@ -1,0 +1,21 @@
+---
+apiVersion: v2
+name: itsos-argo-workflows
+description: A Helm chart for Argo Workflows
+type: application
+version: 0.20.7
+appVersion: v3.4.3
+icon: https://raw.githubusercontent.com/argoproj/argo-workflows/master/docs/assets/argo.png
+deploy: true
+sources:
+  - https://github.com/argoproj/argo-workflows
+maintainers:
+  - name: Rodrigo Roldan
+    email: roldyx@argentech.io
+keywords:
+  - argo-workflows
+  - argoproj
+dependencies:
+  - name: argo-workflows
+    version: 0.20.7
+    repository: https://argoproj.github.io/argo-helm

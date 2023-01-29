@@ -1,0 +1,21 @@
+argo-workflows:
+  server:
+    extraArgs:
+      - --auth-mode=server
+    ingress:
+      # -- Enable an ingress resource
+      enabled: false
+      # -- Additional ingress annotations
+      annotations: {}
+      # -- Additional ingress labels
+      labels: {}
+      # -- Defines which ingress controller will implement the resource
+      ingressClassName: ""
+      hosts:
+        - argo-workflows.itsos.ar
+      # -- List of ingress paths
+      paths:
+        - /
+      # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
+      pathType: Prefix
+      # -- Additional ingress paths
