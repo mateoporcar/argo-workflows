@@ -34,9 +34,10 @@ Ingresar a Harbor > Projects > **proyecto** > Robot Accounts > +New Robot Accoun
 
 Crear un archivo config.json con las credenciales:
 
-''' config.json
+```json
+# config.json
 {"auths":{"https://harbor.domain.ar":{"username":"robot$argo-workflows","password":"eyJh............."}}}
-'''
+```
 
 Crear el secret:
 
